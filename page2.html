@@ -39,9 +39,9 @@
     </section>
 
     <main class="container">
-      <h1 class="title">Page 2: Analog way</h1>
-      <p class="muted">LPF restoration of the zero-padded sequence to recover the analog waveform.</p>
-
+      <h1 class="title" style="text-align: center;">Analog Way to Reconstruct the signal</h1>
+      <p class="muted">In analog domain (if we do DAC), we can pass f_pad signal through a sharp low pass filter, then the curve restore to its original curve.</p>
+      <p class="muted">By setting the cutoff frequency of the filter to B, the waveform is restored to its original continuous form.</p>
       <div class="row">
         <div class="panel">
           <h3>Restored vs Analog Reference</h3>
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-
+      <p class="muted">We present the results in two figures: one showing the recovered curve, and the other illustrating the reconstruction error.</p>
       <div class="panel">
         <h3>Magnitude Spectrum (dB)</h3>
         <canvas id="plot_restored_freq" class="plot"></canvas>
