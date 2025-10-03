@@ -39,9 +39,11 @@
     </section>
 
     <main class="container">
-      <h1 class="title">Page 3: Digital reconstruction (sinc)</h1>
-      <p class="muted">Ideal bandlimited interpolation vs windowed-sinc (Hann, finite support).</p>
-
+      <h1 class="title" style="text-align: center;">Equivalent Digital domain Ideal reconstruction</h1>
+      <p class="muted">Assume a real, baseband, bandlimited signal x(t) with one-sided bandwidth B, sampled at fs>2B. Let samples be x[n]=x(nTs) with Ts=1/fs​.</p>
+      <p class="muted"><b>Whittaker–Shannon (cardinal series)</b>:</p>
+      <p class="muted">This equals the original x(t)if x is strictly bandlimited to ∣f∣≤B<fs/2. In frequency</p>
+      <p class="muted">So the “interpolation filter” is just the ideal brick-wall LPF that removes spectral images at ±k*fs</p>
       <div class="panel">
         <h3>Reconstructions vs Analog Reference</h3>
         <canvas id="plot_recon" class="plot"></canvas>
