@@ -39,21 +39,27 @@
     </section>
 
     <main class="container">
-      <h1 class="title">Nyquist Recovery Demonstration</h1>
-      <p class="muted">Analog domain and Digital domain</p>
+      <h1 class="title" style="text-align: center;">Nyquist Recovery Demonstration: Analog domain and Digital domain</h1>
+      <p class="muted" style="text-align: center;">By Zhu`s Group @ JHU @ Groton School</p>
       <p>
-        Problems definition: Signal processing challenges frequently arise in engineering applications. 
+        <b>Problems definition</b>: Signal processing challenges frequently arise in engineering applications. 
         For instance, detecting a pulse in time-series data is essential in various fields—such as identifying an echo pulse 
         from a medical ultrasonic transducer or recognizing an anomalous pattern from a spaceborne sensor on earth orbit. 
         In these cases, it is critical to accurately determine the exact peaks and valleys of the signal and report their time of occurrence. 
         To enable advanced mathematical analysis, signals are often converted into the digital domain, which requires sampling of the underlying 
         analog data. Ideally, we want to minimize the sampling rate to reduce computational effort, while still preserving all the necessary 
-        information. This principle is governed by the Nyquist Sampling Theorem.
+        information. This principle is governed by the <b>Nyquist Sampling Theorem</b>.
       </p>
       <P>
-        This interactive set of pages mirrors a MATLAB Live Script showcasing the Nyquist–Shannon Sampling Theorem.
-        Use the controls to select the signal type, phase offset, and which representation to view; variables are shared
-        across pages by recomputing from the same parameters.
+        <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem" target="_blank" rel="noopener noreferrer">Nyquist Sampling Theorem</a>: 
+        If the sampling rate f_s > 2B, where B is the highest frequency in the signal, then 
+        the original bandlimited analog signal can be perfectly reconstructed (using an ideal low-pass filter). So even
+        if the sampled points don’t “line up” with the signal peaks in the discrete-time sequence, in theory no information is lost.
+      </p>
+      <p>
+        In this demonstration, we show that a pulse with bandwidth B can still be fully recovered using only 2B samples. 
+        Even if the discrete-time samples do not coincide with the true peaks of the waveform, the information is retained,
+        and the peak/valley locations of the signal can be accurately determined.
       </p>
       <div class="panel">
         <h3>Contents</h3>
