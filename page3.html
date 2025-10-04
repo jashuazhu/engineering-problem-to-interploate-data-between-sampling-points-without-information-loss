@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nyquist Recovery — Page 3</title>
     <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Load MathJax -->
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body data-page="page3">
     <nav class="nav">
@@ -42,6 +49,9 @@
       <h1 class="title" style="text-align: center;">Equivalent Digital domain Ideal reconstruction</h1>
       <p class="muted">Assume a real, baseband, bandlimited signal x(t) with one-sided bandwidth B, sampled at fs>2B. Let samples be x[n]=x(nTs) with Ts=1/fs​.</p>
       <p class="muted"><b>Whittaker–Shannon (cardinal series)</b>:</p>
+      \[
+        { \;\hat x(t)=\sum_{n=-\infty}^{\infty} x[n]\;{sinc}\!\Big(\frac{t-nT_s}{T_s}\Big)\; }  \quad\text{with}\quad {sinc}(u)=\frac{\sin(\pi u)}{\pi u}
+      \]
       <p class="muted">This equals the original x(t)if x is strictly bandlimited to ∣f∣≤B<fs/2. In frequency</p>
       <p class="muted">So the “interpolation filter” is just the ideal brick-wall LPF that removes spectral images at ±k*fs</p>
       <div class="panel">
