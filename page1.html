@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nyquist Recovery — Page 1</title>
+    <title>Nyquist Recovery - Page 1</title>
     <link rel="stylesheet" href="./assets/styles.css" />
-      <!-- Load MathJax -->
+    <!-- Load MathJax -->
     <script>
       window.MathJax = {
         tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
@@ -14,6 +14,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body data-page="page1">
+    <header class="hero container">
+      <h1 class="title">Experiment: The signals</h1>
+    </header>
     <nav class="nav">
       <a href="./index.html">Index</a>
       <a href="./page1.html" class="active">Page 1</a>
@@ -21,70 +24,67 @@
       <a href="./page3.html">Page 3</a>
     </nav>
 
-    <section class="controls">
-      <div class="control">
-        <label>phi_frac (phase, 0–1): <span id="phi_frac_val">0.30</span></label>
-        <input id="phi_frac" type="range" min="0" max="1" step="0.01" value="0.30" />
-      </div>
-      <div class="control">
-        <label>plot_sel</label>
-        <select id="plot_sel">
-          <option value="1">1 — f_analog (s_fine)</option>
-          <option value="2">2 — f_digital (s_samp)</option>
-          <option value="3">3 — f_pad (s_zero)</option>
-          <option value="4">4 — All</option>
-        </select>
-      </div>
-      <div class="control">
-        <label>signal_sel</label>
-        <select id="signal_sel">
-          <option value="1">1 — Sinusoidal Wave</option>
-          <option value="2">2 — Gaussian Pulse</option>
-          <option value="3">3 — Band-Limited Rectangular Pulse</option>
-        </select>
-      </div>
-    </section>
+    <div class="container page-grid">
+      <main class="content">
+        <p class="muted">Time-domain views of analog reference, discrete samples, and zero-padded sequence.</p>
+        <p class="muted">In this study, we demonstrate signal recovery using three representative examples:</p>
+        <li><b>Sinusoidal Wave</b>: A sinusoidal signal with frequency B/2 and a phase shift. The objective is to determine whether the original amplitude and phase can be accurately recovered.</li>
+        <div class="math-block">$$ f_{\text{sin}}(t) = A \cos\!\left(\tfrac{B}{2} t + \phi \right) $$</div>
+        <li><b>Gaussian Pulse</b>: A Gaussian-shaped pulse with an effective bandwidth of B/2. Here, we investigate whether the correct peak value can be recovered when the sampling instants do not coincide with the pulse center.</li>
+        <div class="math-block">$$ f_{\text{gauss}}(t) = A \, e^{-\tfrac{t^2}{2\sigma^2}},\quad \sigma \sim \tfrac{1}{B} $$</div>
+        <li><b>Band-Limited Rectangular Pulse</b>: A rectangular pulse that has been band-limited by an ideal low-pass filter (LPF). We again study whether the correct peak value can be reconstructed when the sampling instants are offset from the true maximum.</li>
+        <div class="math-block">$$ f_{\text{rect}}(t) = A \, \frac{\sin(\pi B t)}{\pi t} = A\,\operatorname{sinc}(B t) $$</div>
+        <p class="muted">For each of these signals, three different representations are examined:</p>
+        <li><b>f_analog</b>: The analog reference curve. Since an ideal continuous waveform cannot be plotted directly, we approximate it by oversampling at a very fine rate fs.</li>
+        <li><b>f_digital</b>: The discretely sampled curve obtained at the critical rate 2B; markers show discrete points and may miss the analog peak/valley.</li>
+        <li><b>f_pad</b>: A zero-padded version of the digital curve, where additional samples are inserted at fs to illustrate the replicated spectra beyond ±B.</li>
 
-    <main class="container">
-      <h1 class="title" style="text-align: center;">Experiment: The signals</h1>
-      <p class="muted">Time-domain views of analog reference, discrete samples, and zero-padded sequence.</p>
-      <p class="muted">In this study, we demonstrate signal recovery using three representative examples:.</p>
-      <li><b>Sinusoidal Wave</b>: A sinusoidal signal with frequency B/2B/2B/2 and a phase shift. The objective is to determine whether the original amplitude and phase can be accurately recovered.</li>
-      \[
-        f_{\text{sin}}(t) = A \cos\!\left(\frac{B}{2}t + \phi \right)fsin(t)=Acos(2Bt+\phi ) 
-      \]
-      <li><b>Gaussian Pulse</b>: A Gaussian-shaped pulse with an effective bandwidth of B/2B/2B/2. Here, we investigate whether the correct peak value can be recovered when the sampling instants do not coincide with the pulse center.</li>
-      \[
-        f_{\text{gauss}}(t) = A \, e^{-\frac{t^2}{2\sigma^2}},  \quad \text{with  } \sigma \sim \frac{1}{B}
-      \]
-      <li><b>Band-Limited Rectangular Pulse</b>: A rectangular pulse that has been band-limited by an ideal low-pass filter (LPF). We again study whether the correct peak value can be reconstructed when the sampling instants are offset from the true maximum.</li>
-      \[
-        f_{\text{rect}}(t) = A \, \frac{\sin(\pi B t)}{\pi t} = A \, \text{sinc}(B t)
-      \]
-      <p class="muted">For each of these signals, three different representations are examined:</p>
-      <li><b>f_analog</b>: The analog reference curve. Since an ideal continuous waveform cannot be plotted directly, we approximate it by oversampling at a very fine rate fs.</li>
-      <li><b>f_digital</b>: The discretely sampled curve obtained at the critical rate 2B, may miss the peak or valley of analog signal.</li>
-      <li><b>ef_pad</b>: A zero-padded version of the digital curve, where additional samples are inserted at the fs, This allows us to illustrate the replicated spectra beyond the band ±B.</li>
-      
-      <div class="panel">
-        <h3>Time Domain</h3>
-        <canvas id="plot_time" class="plot"></canvas>
-        <div id="legend_time" class="legend"></div>
-        <p class="note">
-          - s_fine approximates the analog curve on a very fine grid (fs_fine).<br />
-          - s_samp are samples at fs ≈ 2B; markers show discrete points.<br />
-          - s_zero places sample values onto the fine grid at sample instants.
-        </p>
-      </div>
+        <div class="panel">
+          <h3>Time Domain</h3>
+          <canvas id="plot_time" class="plot"></canvas>
+          <div id="legend_time" class="legend"></div>
+          <p class="note">
+            - s_fine approximates the analog curve on a very fine grid (fs_fine).<br />
+            - s_samp are samples at fs = 2B; markers show discrete points.<br />
+            - s_zero places sample values onto the fine grid at sample instants.
+          </p>
+        </div>
 
-      <div class="panel">
-        <h3>Magnitude Spectrum (dB)</h3>
-        <canvas id="plot_freq" class="plot"></canvas>
-        <div id="legend_freq" class="legend"></div>
-        <p class="note">Frequency axis limited to [0, 10·B]. Magnitude normalized to 0 dB peak per series.</p>
-      </div>
-    </main>
+        <div class="panel">
+          <h3>Magnitude Spectrum (dB)</h3>
+          <canvas id="plot_freq" class="plot"></canvas>
+          <div id="legend_freq" class="legend"></div>
+          <p class="note">Frequency axis limited to [0, 10·B]. Magnitude normalized to 0 dB peak per series.</p>
+        </div>
+      </main>
+      <aside class="sidebar">
+        <section class="controls">
+          <div class="control">
+            <label>Sampling time offset (phase change): <span id="phi_frac_val">0.30</span></label>
+            <input id="phi_frac" type="range" min="0" max="1" step="0.01" value="0.30" />
+          </div>
+          <div class="control">
+            <label>Signal type</label>
+            <select id="plot_sel">
+              <option value="1">1. Original signal</option>
+              <option value="2">2. Sampled signal</option>
+              <option value="3">3. Padded signal</option>
+              <option value="4">4. All</option>
+            </select>
+          </div>
+          <div class="control">
+            <label>Select signals</label>
+            <select id="signal_sel">
+              <option value="1">1. Sinusoid</option>
+              <option value="2">2. Gaussian pulse</option>
+              <option value="3">3. Flat-top pulse</option>
+            </select>
+          </div>
+        </section>
+      </aside>
+    </div>
 
     <script type="module" src="./assets/app.js"></script>
   </body>
   </html>
+
